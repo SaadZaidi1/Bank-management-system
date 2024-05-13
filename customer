@@ -1,0 +1,86 @@
+void customer()
+{
+    char pass[10];
+    char c;
+    string s, name, acc_no, password;
+    int i=0,x;
+    system("cls");
+    cout<<"\n\n\t\t\tMENU";
+    cout<<"\n\t\t1. New Customer";
+    cout<<"\n\t\t2. Existing Customer";
+    cout<<"\n\t\tEnter Your Choice : ";
+    cin>>x;
+    if(x==1)
+        menu_c();
+    else
+    {
+        cout<<"\n\n\t\tFor Security Purpose:";
+        cout<<"\n\n\t\tEnter the Login Customer Id:";
+        cin>>name;
+        cout<<"\n\n\t\tEnter the password to login:";
+        while(1)
+        {
+            c=getch();
+            printf("*");
+            s+=c;
+            if(c=='\r')
+            {
+                break;
+            }       
+        }
+        s = s.substr(0, s.size()-1);
+        cout<<endl;
+        ifstream is("Account_info.csv");
+        do
+        {
+            getline(is,acc_no, ',');
+            getline(is,password, '\n');
+            if(acc_no == name)
+            {
+                i = 1;
+                if(password == s)
+                {
+                    printf("\n\nAccess Granted!\nLOADING");
+                    for(i=0;i<=6;i++)
+                    {
+                        fordelay(100000000);
+                        printf(".");
+                    }
+                    system("cls");
+                    menu_c();
+                }
+            }
+        } while(is.good());
+        
+        if(i == 0)
+        {   
+            printf("\n\nWrong password or Customer Id!!");
+            login_try:
+            cout<<"\nEnter 1 to try again, 2 for Main Menu, and"
+                <<" 0 to Exit:";
+            scanf("%d",&main_exit);
+            if (main_exit==1)
+            {
+                system("cls");
+                customer();
+            }
+            else if (main_exit==0)
+            {
+                system("cls");
+                close();
+            }
+            else if (main_exit == 2)
+            {
+                system("cls");
+                main();
+            }
+            else
+            {
+                printf("\nInvalid!");
+                fordelay(1000000000);
+                system("cls");
+                goto login_try;
+            }
+        }    
+    }
+}
