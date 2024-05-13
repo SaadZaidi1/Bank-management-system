@@ -1,0 +1,155 @@
+void HBL::transfer()
+{
+    int amount, amt, test = 0;
+    string acc_no, y, x;
+
+    {
+        ifstream file("Bank_Record.csv");
+        ofstream ofile("temp.csv");
+        HBL ac;
+
+        cout << "Enter Your account number:";
+        cin >> acc_no;
+
+        do
+        {
+            getline(file, account_number, ',');
+            getline(file, name, ',');
+            getline(file, dob, ',');
+            getline(file, age, ',');
+            getline(file, address, ',');
+            getline(file, phone, ',');
+            getline(file, depo, ',');
+            getline(file, acc_type, ',');
+            getline(file, interest, '\n');
+
+            if (acc_no == account_number)
+            {
+                test = 1;
+                cout << "Account No.:" << account_number << endl;
+                cout << "Name:" << name << endl;
+                cout << "DOB:" << dob << endl;
+                cout << "Age:" << age << endl;
+                cout << "Address: " << address << endl;
+                cout << "Phone number:" << phone << endl;
+                cout << "Type Of Account:" << acc_type << endl;
+                cout << "Balance:" << depo << endl;
+
+                cout << "\nEnter the amount you want to transfer: ";
+                cin >> amt;
+
+                file.seekg(0, ios::beg);
+
+                if (amt > atoi(depo.c_str()))
+                    cout << "Not Enough Balance\n";
+                else
+                {
+                    amount = atoi(depo.c_str()) - amt;
+                   // y = to_string(amount);
+                    cout << "\n\tBalance : " << y;
+
+                    while (getline(file, x, ','))
+                    {
+                        if (x == depo)
+                        {
+                            ofile << y << ",";
+                        }
+                        else
+                        {
+                            ofile << x << ",";
+                        }
+                    }
+                }
+                break;
+            }
+        } while (file.good());
+
+        file.close();
+        ofile.close();
+        remove("Bank_Record.csv");
+        rename("temp.csv", "Bank_Record.csv");
+    }
+
+    ifstream file("Bank_Record.csv");
+    ofstream ofile("temp.csv");
+
+    if (test == 0)
+    {
+        cout << "\n\n\t\tAccount doesn't Exist!";
+    }
+
+    cout << "\nEnter account number where to transfer:";
+    cin >> acc_no;
+    test = 0;
+
+    file.seekg(0, ios::beg);
+
+    do
+    {
+        getline(file, account_number, ',');
+        getline(file, name, ',');
+        getline(file, dob, ',');
+        getline(file, age, ',');
+        getline(file, address, ',');
+        getline(file, phone, ',');
+        getline(file, depo, ',');
+        getline(file, acc_type, ',');
+
+        if (acc_no == account_number)
+        {
+            test = 1;
+            cout << "Account No.:" << account_number << endl;
+            cout << "Name:" << name << endl;
+            // Update balance
+            amt = atoi(depo.c_str()) + amt;
+           // y = to_string(amt);
+            file.seekg(0, ios::beg);
+            while (getline(file, x, ','))
+            {
+                if (x == depo)
+                    ofile << y << ",";
+                else
+                    ofile << x << ",";
+            }
+            cout << "\n\tTransfer Successful!";
+            break;
+        }
+    } while (file.good());
+
+    file.close();
+    ofile.close();
+    remove("Bank_Record.csv");
+    rename("temp.csv", "Bank_Record.csv");
+
+    if (test == 0)
+    {
+        cout << "\n\n\t\tAccount doesn't Exist!";
+    }
+
+    login_try:
+    cout << "\nEnter 1. For Main Menu\n\t2. For Previous Menu "
+         << "and 0 to Exit:";
+    scanf("%d", &main_exit);
+    if (main_exit == 1)
+    {
+        system("cls");
+        main();
+    }
+    else if (main_exit == 0)
+    {
+        system("cls");
+        close();
+    }
+    else if (main_exit == 2)
+    {
+        system("cls");
+        menu_c();
+    }
+    else
+    {
+        printf("\nInvalid!");
+        fordelay(1000000000);
+        system("cls");
+        goto login_try;
+    }
+}
