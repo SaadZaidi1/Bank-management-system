@@ -1,0 +1,71 @@
+void HBL::display_all()
+{
+    int amount;
+    cout << "\n\n\t\tACCOUNT HOLDER LIST\n\n";
+    cout << "======================================================================="
+         << "=======================================================================\n";
+    cout << "  Account No.\t\tName\t\tType\t\tBalance\t\tAddress\t\tPhone No.\n";
+    cout << "======================================================================="
+         << "=======================================================================\n";
+
+    ifstream is("Bank_record.csv");
+    if (!is)
+    {
+        cerr << "Error opening file." << endl;
+        return;
+    }
+
+    int i = 1;
+    while (is.peek() != EOF)
+    {
+        cout << i << ". ";
+        i++;
+
+        getline(is, account_number, ',');
+        if (is.eof())
+            break;
+
+        getline(is, name, ',');
+        getline(is, dob, ',');
+        getline(is, age, ',');
+        getline(is, address, ',');
+        getline(is, phone, ',');
+        getline(is, depo, ',');
+        getline(is, acc_type, ',');
+        getline(is, interest, '\n');
+
+        amount = atoi(depo.c_str());
+
+        cout << account_number << "\t\t" << name << "\t\t" << acc_type
+             << "\t\t" << amount << "\t\t" << address << "\t\t" << phone << endl;
+    }
+
+    is.close();
+
+    login_try:
+    cout << "\nEnter 1. For Main Menu\n\t2. For Previous Menu "
+         << "and 0 to Exit:";
+    scanf("%d", &main_exit);
+    if (main_exit == 1)
+    {
+        system("cls");
+        main();
+    }
+    else if (main_exit == 0)
+    {
+        system("cls");
+        close();
+    }
+    else if (main_exit == 2)
+    {
+        system("cls");
+        menu_e();
+    }
+    else
+    {
+        printf("\nInvalid!");
+        fordelay(1000000000);
+        system("cls");
+        goto login_try;
+    }
+}
