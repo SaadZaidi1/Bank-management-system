@@ -1,0 +1,67 @@
+void menu_c(void)
+{
+	int choice;
+    HBL B;
+    menu:
+    system("cls");
+    system("color 2");
+	cout<<"\n\n\t\t\tBANK RECORD SYSTEM";
+    cout<<"\n\n\n\t\t\t\xB2\xB2\xB2\xB2\xB2\xB2\xB2 WELCOME"
+		<<" TO THE MAIN MENU \xB2\xB2\xB2\xB2\xB2\xB2\xB2";
+    cout<<"\n\n\t\t1.Create new account\n";
+    cout<<"\t\t2.Update information of existing account\n";
+    cout<<"\t\t3.For transactions\n";
+    cout<<"\t\t4.Check the details of existing account\n";
+    cout<<"\t\t5.For Transfer\n";
+    cout<<"\t\t6.Exit\n\n\n\n\n\t\t Enter your choice:";
+    cin>>choice;
+
+    system("cls");
+    switch(choice)
+    {
+        case 1:
+				B.acc_write();
+        		break;
+        case 2:
+				B.modify_account();
+        		break;
+    	case 3:
+				B.deposit_withdraw();
+        		break;
+        case 4:
+				B.search_rec();
+        		break;
+        case 5:
+				B.transfer();
+        		break;
+        case 6:
+				close();
+        		break;
+    }
+    login_try:
+    cout<<"\nEnter 1 for Main Menu , 2 for Previous Menu and"
+			<<" 0 to Exit:";
+    scanf("%d",&main_exit);
+    if (main_exit==1)
+    {
+    	system("cls");
+        main();
+    }
+    else if (main_exit==0)
+    {
+    	system("cls");
+        close();
+	}
+	else if (main_exit == 2)
+	{
+		system("cls");
+		employee();
+	}
+    else
+    {
+		printf("\nInvalid!");
+        fordelay(1000000000);
+        system("cls");
+        goto login_try;
+	}
+}
