@@ -1,0 +1,113 @@
+class Bank {
+protected:
+    string account_number;
+    string name;
+    string dob;
+    string age;
+    string address;
+    string phone;
+    string depo;
+    string acc_type;
+    string password;
+    string interest;
+
+public:
+	Bank() {}
+    Bank(const string &acc_num, const string &n, const string &d, const string &a,
+         const string &addr, const string &ph, const string &dep, const string &type,
+         const string &pass, const string &intr)
+        : account_number(acc_num), name(n), dob(d), age(a), address(addr),
+          phone(ph), depo(dep), acc_type(type), password(pass), interest(intr) {}
+          
+    // Setter methods
+    void setAccountNumber(const string &acc_num) {
+        account_number = acc_num;
+    }
+
+    void setName(const string &n) {
+        name = n;
+    }
+
+    void setDOB(const string &d) {
+        dob = d;
+    }
+
+    void setAge(const string &a) {
+        age = a;
+    }
+
+    void setAddress(const string &addr) {
+        address = addr;
+    }
+
+    void setPhone(const string &ph) {
+        phone = ph;
+    }
+
+    void setDepo(const string &dep) {
+        depo = dep;
+    }
+
+    void setAccountType(const string &type) {
+        acc_type = type;
+    }
+
+    void setPassword(const string &pass) {
+        password = pass;
+    }
+
+    void setInterest(const string &intr) {
+        interest = intr;
+    }
+
+    // Getter methods
+    string getAccountNumber() const {
+        return account_number;
+    }
+
+    string getName() const {
+        return name;
+    }
+
+    string getDOB() const {
+        return dob;
+    }
+
+    string getAge() const {
+        return age;
+    }
+
+    string getAddress() const {
+        return address;
+    }
+
+    string getPhone() const {
+        return phone;
+    }
+
+    string getDepo() const {
+        return depo;
+    }
+
+    string getAccountType() const {
+        return acc_type;
+    }
+
+    string getPassword() const {
+        return password;
+    }
+
+    string getInterest() const {
+        return interest;
+    }
+
+    virtual void read_data() = 0;
+    virtual void acc_write() = 0;
+    virtual void modify_account() = 0;
+    virtual void search_rec() = 0;
+    virtual void deposit_withdraw() = 0;
+    virtual void display_all() = 0;
+    virtual void transfer() = 0;
+    
+    virtual ~Bank() {}
+};
